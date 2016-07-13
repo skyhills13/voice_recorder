@@ -29,14 +29,26 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func playButtonPressed(sender: UIButton){
         configureUI(.Playing)
-        //TODO switch 작성
-//        switch  {
-//        case .Echo:
-//            playSound(echo : true)
-//        }
+        if let pressedButtonType = ButtonType(rawValue: sender.tag) {
+            switch pressedButtonType{
+            case .Echo:
+                playSound(echo : true)
+            case .Reverb:
+                playSound(reverb : true)
+            case .Low:
+                playSound(pitch : -1000.0)
+            case .High:
+                playSound(pitch : 1000.0)
+            case .Slow:
+                playSound(rate: 1.0)
+            case .Fast:
+                playSound(rate : 5.0)
+            }
+        }
     }
     
     @IBAction func stopButtonPressed(sender: UIButton){
+        stopAudio()
         configureUI(.NotPlaying)
     }
     
@@ -53,7 +65,5 @@ class PlaySoundsViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

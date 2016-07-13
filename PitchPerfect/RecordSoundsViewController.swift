@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class RecordSoundsViewController: UIViewController {
+class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
 
     @IBOutlet weak var startRecordingButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
@@ -36,9 +36,15 @@ class RecordSoundsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // TODO path지정
+        let dirPath = NSURL;
         
-//        audioRecorder.delegate = self
-        // TODO audioRecorder init부터 prepare까지
+        
+        var audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        audioRecorder = AVAudioRecorder.init(URL: dirPath, settings: <#T##[String : AnyObject]#>)
+        
+        audioRecorder.delegate = self
+        // TODO prepareToRecord, record까지
         
  
         //이 위에 있는 것들을 start가 아니라 여기서 하는 것이 맞는지 확인.
@@ -49,16 +55,21 @@ class RecordSoundsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func performSegueWithIdentifier(identifier: String, sender: AnyObject?) {
-        if(identifier == "stopRecordingSegue") {
-//            audioRecorder.url
-            print("right segue")
+    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+        if(flag == true) {
+            //TODO sender에 무엇을 넣어야 하나?
+            performSegueWithIdentifier("stopRecordingSegue", sender: <#T##AnyObject?#>)
         } else {
-            print("wrong segue id")
+            print("audio recording did not finish")
         }
     }
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        if(segue.identifier == "stopRecordingSegue") {
+            let playSoundsVC = segue.destinationViewController as! PlaySoundsViewController
+            playSoundsVC.recordedAudioURL = audioRecorder.url
+        } else {
+            print("wrong segue. segue id = ", segue.identifier)
+        }
     }
 }
