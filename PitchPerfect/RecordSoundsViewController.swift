@@ -26,21 +26,21 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let currentDateTime = NSDate()
         let formatter = NSDateFormatter()
         formatter.dateFormat = "ddMMyyyy-HHmmss"
-        let fileName = formatter.stringFromDate(currentDateTime)+".wav"
+        let fileName = formatter.stringFromDate(currentDateTime)+".mp4"
         
         let pathComponents = [dirPath, fileName]
+        let recordingFilePath = NSURL.fileURLWithPathComponents(pathComponents)
         
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
         try! audioSession.setActive(true)
         
-        audioRecorder = AVAudioRecorder.init(URL: NSURL.fileURLWithPathComponents(pathComponents)!, settings: nil)
+        try! audioRecorder = AVAudioRecorder(URL: recordingFilePath!, settings: [:])
         
         audioRecorder.delegate = self
+        audioRecorder.meteringEnabled = true
         audioRecorder.prepareToRecord()
         audioRecorder.record()
-        // TODO prepareToRecord, record까지
-        
     }
     
     @IBAction func stopRecording(sender: UIButton) {
@@ -65,9 +65,8 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
-        if(flag == true) {
-            //TODO sender에 무엇을 넣어야 하나?
-            performSegueWithIdentifier("stopRecordingSegue", sender: <#T##AnyObject?#>)
+        if(flag) {
+            performSegueWithIdentifier("stopRecordingSegue", sender: audioRecorder.url)
         } else {
             print("audio recording did not finish")
         }
@@ -76,7 +75,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "stopRecordingSegue") {
             let playSoundsVC = segue.destinationViewController as! PlaySoundsViewController
-            playSoundsVC.recordedAudioURL = audioRecorder.url
+            playSoundsVC.recordedAudioURL = sender as! NSURL
         } else {
             print("wrong segue. segue id = ", segue.identifier)
         }
