@@ -21,10 +21,32 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         stopRecordingButton.enabled = true;
         recordingLabel.text = "recording in progress"
         
+        let dirPath =  NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String;
+        
+        let currentDateTime = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "ddMMyyyy-HHmmss"
+        let fileName = formatter.stringFromDate(currentDateTime)+".wav"
+        
+        let pathComponents = [dirPath, fileName]
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        try! audioSession.setActive(true)
+        
+        audioRecorder = AVAudioRecorder.init(URL: NSURL.fileURLWithPathComponents(pathComponents)!, settings: nil)
+        
+        audioRecorder.delegate = self
+        audioRecorder.prepareToRecord()
+        audioRecorder.record()
+        // TODO prepareToRecord, record까지
+        
     }
     
     @IBAction func stopRecording(sender: UIButton) {
         recordingLabel.text = "recording done"
+        let audioSession = AVAudioSession.sharedInstance()
+        try! audioSession.setActive(false)
         audioRecorder.stop()
     }
     
@@ -35,19 +57,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO path지정
-        let dirPath = NSURL;
-        
-        
-        var audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-        audioRecorder = AVAudioRecorder.init(URL: dirPath, settings: <#T##[String : AnyObject]#>)
-        
-        audioRecorder.delegate = self
-        // TODO prepareToRecord, record까지
-        
- 
-        //이 위에 있는 것들을 start가 아니라 여기서 하는 것이 맞는지 확인.
     }
 
     override func didReceiveMemoryWarning() {
