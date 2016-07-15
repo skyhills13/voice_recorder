@@ -54,16 +54,13 @@ class PlaySoundsViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         setupAudio()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        echoButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        reverbButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        slowButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        fastButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        lowButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        highButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        stopButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+    }    
 }
 

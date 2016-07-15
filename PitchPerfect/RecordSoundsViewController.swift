@@ -18,19 +18,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     var audioRecorder: AVAudioRecorder!
     
     override func viewWillAppear(animated: Bool) {
+        startRecordingButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
+        stopRecordingButton.imageView?.contentMode = UIViewContentMode.ScaleAspectFit
         recordingLabel.text = "press to record"
         stopRecordingButton.enabled = false;
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     @IBAction func startRecording(sender: AnyObject) {
         stopRecordingButton.enabled = true
         recordingLabel.text = "recording in progress"
@@ -46,10 +39,18 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         let recordingFilePath = NSURL.fileURLWithPathComponents(pathComponents)
         
         let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
-//        try! audioSession.setActive(true)
         
-        try! audioRecorder = AVAudioRecorder(URL: recordingFilePath!, settings: [:])
+        do{
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+        } catch {
+            showAlert("error", message: "something went wrong while recording", alertType: Alerts.AudioSessionError)
+        }
+        
+        do {
+            try audioRecorder = AVAudioRecorder(URL: recordingFilePath!, settings: [:])
+        } catch {
+            showAlert("error", message: "something went wrong while recording", alertType: Alerts.AudioRecorderError)
+        }
         
         audioRecorder.delegate = self
         audioRecorder.meteringEnabled = true
@@ -61,15 +62,21 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func stopRecording(sender: UIButton) {
         recordingLabel.text = "recording done"
         let audioSession = AVAudioSession.sharedInstance()
-        try! audioSession.setActive(false)
+        do{
+            try audioSession.setActive(false)
+        } catch {
+            showAlert("error", message: "something went wrong while recording", alertType: Alerts.AudioSessionError)
+        }
         audioRecorder.stop()
+        startRecordingButton.enabled = true
+        stopRecordingButton.enabled = false
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
         if(flag) {
             performSegueWithIdentifier("stopRecordingSegue", sender: audioRecorder.url)
         } else {
-            print("audio recording did not finish")
+            showAlert("error", message: "something went wrong while recording", alertType: Alerts.RecordingFailedTitle)
         }
     }
     
@@ -80,5 +87,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             print("wrong segue. segue id = ", segue.identifier)
         }
+    }
+    
+    func showAlert(title: String, message: String, alertType : String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: alertType, style: .Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

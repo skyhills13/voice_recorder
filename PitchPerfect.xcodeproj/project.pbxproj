@@ -16,6 +16,7 @@
 		85B8797D1D34AAB20035F897 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85B8797B1D34AAB20035F897 /* LaunchScreen.storyboard */; };
 		85B879881D34AAB30035F897 /* PitchPerfectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B879871D34AAB30035F897 /* PitchPerfectTests.swift */; };
 		85B879931D34AAB30035F897 /* PitchPerfectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B879921D34AAB30035F897 /* PitchPerfectUITests.swift */; };
+		85CD7C141D39195B00F01F8D /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CD7C131D39195B00F01F8D /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		85B8798E1D34AAB30035F897 /* PitchPerfectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PitchPerfectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85B879921D34AAB30035F897 /* PitchPerfectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchPerfectUITests.swift; sourceTree = "<group>"; };
 		85B879941D34AAB30035F897 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85CD7C131D39195B00F01F8D /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				85B879791D34AAB20035F897 /* Assets.xcassets */,
 				85B8797B1D34AAB20035F897 /* LaunchScreen.storyboard */,
 				85B8797E1D34AAB20035F897 /* Info.plist */,
+				85CD7C131D39195B00F01F8D /* Utils.swift */,
 			);
 			path = PitchPerfect;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85CD7C141D39195B00F01F8D /* Utils.swift in Sources */,
 				858BCD471D34E8A3003419A6 /* RecordSoundsViewController.swift in Sources */,
 				858BCD491D3503A5003419A6 /* PlaySoundsViewController+Audio.swift in Sources */,
 				85B879751D34AAB20035F897 /* PlaySoundsViewController.swift in Sources */,

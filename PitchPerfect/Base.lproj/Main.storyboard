@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XiX-qx-ycj">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tur-he-fu7" userLabel="startRecordButton">
-                                <rect key="frame" x="160" y="251" width="100" height="100"/>
+                                <rect key="frame" x="250" y="182" width="100" height="100"/>
                                 <state key="normal" image="RecordButton"/>
                                 <connections>
                                     <action selector="startRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fHL-Ya-YoB"/>
@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ez0-fg-Gcd" userLabel="stopRecordButton">
-                                <rect key="frame" x="354" y="275" width="50" height="50"/>
+                                <rect key="frame" x="275" y="313" width="50" height="50"/>
                                 <state key="normal" image="StopButton"/>
                                 <connections>
                                     <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X9B-1J-ywb"/>
@@ -41,12 +41,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ez0-fg-Gcd" firstAttribute="leading" secondItem="rcM-TR-av1" secondAttribute="trailing" constant="33" id="3ag-v4-hVr"/>
-                            <constraint firstItem="tur-he-fu7" firstAttribute="centerY" secondItem="rcM-TR-av1" secondAttribute="centerY" id="BPE-WR-4W2"/>
+                            <constraint firstItem="ez0-fg-Gcd" firstAttribute="centerX" secondItem="rcM-TR-av1" secondAttribute="centerX" id="3jz-RY-lJ0"/>
+                            <constraint firstItem="rcM-TR-av1" firstAttribute="top" secondItem="tur-he-fu7" secondAttribute="bottom" constant="8" id="41O-Eo-Z4v"/>
+                            <constraint firstItem="ez0-fg-Gcd" firstAttribute="top" secondItem="rcM-TR-av1" secondAttribute="bottom" constant="2" id="XuE-4g-e8C"/>
                             <constraint firstItem="rcM-TR-av1" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jGi-0b-reZ"/>
                             <constraint firstItem="rcM-TR-av1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jtJ-Jo-pyg"/>
-                            <constraint firstItem="rcM-TR-av1" firstAttribute="leading" secondItem="tur-he-fu7" secondAttribute="trailing" constant="19" id="xGd-nv-gB0"/>
-                            <constraint firstItem="ez0-fg-Gcd" firstAttribute="centerY" secondItem="rcM-TR-av1" secondAttribute="centerY" id="xLE-6q-CnU"/>
+                            <constraint firstItem="tur-he-fu7" firstAttribute="centerX" secondItem="rcM-TR-av1" secondAttribute="centerX" id="xZG-Fd-0a8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="2oZ-Ih-2bD"/>
